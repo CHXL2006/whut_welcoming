@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>武汉理工大学余家头校区·大一综合信息导航</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+        .transition-all-500 { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-effect { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .nav-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 91, 172, 0.2); }
+        .active-tab { border-bottom: 3px solid #005BAC; color: #005BAC; }
+        .content-section { display: none; opacity: 0; transform: translateY(20px); }
+        .content-section.active { display: block; opacity: 1; transform: translateY(0); transition: all 0.5s ease; }
+        .top-nav-btn { position: relative; padding: 0.5rem 0.75rem; font-weight: 500; font-size: 0.875rem; color: rgba(255,255,255,0.8); transition: all 0.2s; cursor: pointer; }
+        .top-nav-btn:hover { color: #ffffff; }
+        .top-nav-btn.active { color: #ffffff; }
+        .top-nav-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 0.75rem; right: 0.75rem; height: 2px; background: #ffffff; border-radius: 1px; }
+        .modal-overlay { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 1rem; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: white; border-radius: 1.5rem; max-width: 48rem; width: 100%; max-height: 85vh; overflow-y: auto; padding: 2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+        .food-icon-card { cursor: pointer; transition: all 0.3s; }
+        .food-icon-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 91, 172, 0.12); }
+        .club-card { cursor: pointer; transition: all 0.3s; }
+        .club-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 91, 172, 0.12); }
+        .map-category-card { border-radius: 1rem; padding: 1rem; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen is-mb-ai-setting" style="">
+<!-- 顶部深蓝色导航栏 -->
+<nav class="sticky top-0 z-50 bg-[#005BAC] shadow-lg px-4 md:px-8 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2 cursor-pointer" onclick="showSection('home')">
+<div class="bg-white/20 p-1.5 rounded-lg">
+<iconify-icon class="text-white" icon="mdi:school" width="22"></iconify-icon>
+</div>
+<h1 class="text-lg md:text-xl font-bold text-white tracking-tight">WHUT 余区新生导航</h1>
+</div>
+<div class="hidden md:flex items-center gap-1">
+<button class="top-nav-btn active" data-section="home" onclick="showSection('home')">首页</button>
+<button class="top-nav-btn" data-section="dorm" onclick="showSection('dorm')">宿舍信息</button>
+<button class="top-nav-btn" data-section="food" onclick="showSection('food')">食堂美食</button>
+<button class="top-nav-btn" data-section="club" onclick="showSection('club')">社团组织</button>
+<button class="top-nav-btn" data-section="service" onclick="showSection('service')">校园生活</button>
+<button class="top-nav-btn" data-section="faq" onclick="showSection('faq')">常见问题</button>
+</div>
+<!-- 移动端菜单按钮 -->
+<button class="md:hidden text-white p-1" onclick="toggleMobileMenu()">
+<iconify-icon icon="mdi:menu" width="24"></iconify-icon>
+</button>
+</nav>
+<!-- 移动端下拉菜单 -->
+<div class="hidden md:hidden bg-[#004d94] px-4 py-3 space-y-1" id="mobileMenu">
+<button class="block w-full text-left text-white/80 hover:text-white py-2 text-sm font-medium" data-section="home" onclick="showSection('home');hideMobileMenu()">首页</button>
+<button class="block w-full text-left text-white/80 hover:text-white py-2 text-sm font-medium" data-section="dorm" onclick="showSection('dorm');hideMobileMenu()">宿舍信息</button>
+<button class="block w-full text-left text-white/80 hover:text-white py-2 text-sm font-medium" data-section="food" onclick="showSection('food');hideMobileMenu()">食堂美食</button>
+<button class="block w-full text-left text-white/80 hover:text-white py-2 text-sm font-medium" data-section="club" onclick="showSection('club');hideMobileMenu()">社团组织</button>
+<button class="block w-full text-left text-white/80 hover:text-white py-2 text-sm font-medium" data-section="service" onclick="showSection('service');hideMobileMenu()">校园生活</button>
+<button class="block w-full text-left text-white/80 hover:text-white py-2 text-sm font-medium" data-section="faq" onclick="showSection('faq');hideMobileMenu()">常见问题</button>
+</div>
+<main class="max-w-7xl mx-auto px-6 py-12">
+<!-- ==================== 1. 首页 ==================== -->
+<section class="content-section active" id="home">
+<div class="text-center mb-12">
+<h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">欢迎来到余家头校区</h2>
+<p class="text-lg text-slate-500 max-w-2xl mx-auto">开启你的武汉理工大学新征程。在这里，你可以快速了解报道流程、宿舍环境、校园美食及更多生活资讯。</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+<div class="nav-card bg-white p-8 rounded-3xl border border-slate-100 flex flex-col items-center text-center cursor-pointer transition-all-500" onclick="showSection('guide')">
+<div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4">
+<iconify-icon icon="mdi:clipboard-text-outline" width="32"></iconify-icon>
+</div>
+<h3 class="text-lg font-bold">报道流程</h3>
+<p class="text-sm text-slate-400 mt-2">入学步骤、材料清单</p>
+</div>
+<div class="nav-card bg-white p-8 rounded-3xl border border-slate-100 flex flex-col items-center text-center cursor-pointer transition-all-500" onclick="showSection('dorm')">
+<div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-4">
+<iconify-icon icon="mdi:home-variant-outline" width="32"></iconify-icon>
+</div>
+<h3 class="text-lg font-bold">宿舍信息</h3>
+<p class="text-sm text-slate-400 mt-2">环境对比、管理规定</p>
+</div>
+<div class="nav-card bg-white p-8 rounded-3xl border border-slate-100 flex flex-col items-center text-center cursor-pointer transition-all-500" onclick="showSection('food')">
+<div class="w-16 h-16 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-4">
+<iconify-icon icon="mdi:noodles" width="32"></iconify-icon>
+</div>
+<h3 class="text-lg font-bold">食堂美食</h3>
+<p class="text-sm text-slate-400 mt-2">一二食堂、档口推荐</p>
+</div>
+<div class="nav-card bg-white p-8 rounded-3xl border border-slate-100 flex flex-col items-center text-center cursor-pointer transition-all-500" onclick="showSection('club')">
+<div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-4">
+<iconify-icon icon="mdi:account-group-outline" width="32"></iconify-icon>
+</div>
+<h3 class="text-lg font-bold">社团组织</h3>
+<p class="text-sm text-slate-400 mt-2">学生会、兴趣社团</p>
+</div>
+<div class="nav-card bg-white p-8 rounded-3xl border border-slate-100 flex flex-col items-center text-center cursor-pointer transition-all-500" onclick="showSection('faq')">
+<div class="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mb-4">
+<iconify-icon icon="mdi:help-circle-outline" width="32"></iconify-icon>
+</div>
+<h3 class="text-lg font-bold">常见问题</h3>
+<p class="text-sm text-slate-400 mt-2">答疑解惑、避坑指南</p>
+</div>
+<div class="nav-card bg-white p-8 rounded-3xl border border-slate-100 flex flex-col items-center text-center cursor-pointer transition-all-500" onclick="showSection('service')">
+<div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-4">
+<iconify-icon icon="mdi:map-marker-radius-outline" width="32"></iconify-icon>
+</div>
+<h3 class="text-lg font-bold">校园服务</h3>
+<p class="text-sm text-slate-400 mt-2">地图导航、设施分布</p>
+</div>
+</div>
+</section>
+<!-- ==================== 2. 报道流程 ==================== -->
+<section class="content-section" id="guide">
+<div class="flex items-center gap-4 mb-8">
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors" onclick="showSection('home')">
+<iconify-icon icon="mdi:arrow-left" width="24"></iconify-icon>
+</button>
+<h2 class="text-3xl font-bold">报道流程指南</h2>
+</div>
+<div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+<div class="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-blue-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">1</div>
+<div class="w-[calc(100%-4rem)] md:w-[45%] p-6 rounded-2xl border border-slate-100 bg-slate-50 shadow-sm">
+<h4 class="font-bold text-blue-600 mb-1">线上预报到</h4>
+<p class="text-slate-600 text-sm">登录学校迎新系统，完成个人信息采集，选择宿舍意向（如适用）。</p>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-blue-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">2</div>
+<div class="w-[calc(100%-4rem)] md:w-[45%] p-6 rounded-2xl border border-slate-100 bg-slate-50 shadow-sm">
+<h4 class="font-bold text-blue-600 mb-1">现场报到</h4>
+<p class="text-slate-600 text-sm">携带录取通知书、身份证、个人档案、户口迁移证（如有）前往指定报到点。</p>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-blue-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">3</div>
+<div class="w-[calc(100%-4rem)] md:w-[45%] p-6 rounded-2xl border border-slate-100 bg-slate-50 shadow-sm">
+<h4 class="font-bold text-blue-600 mb-1">入住宿舍</h4>
+<p class="text-slate-600 text-sm">凭报到单到分配的楼栋宿管处领取钥匙。余14舍楼下有洗衣房。</p>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-blue-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">4</div>
+<div class="w-[calc(100%-4rem)] md:w-[45%] p-6 rounded-2xl border border-slate-100 bg-slate-50 shadow-sm">
+<h4 class="font-bold text-blue-600 mb-1">体检安排</h4>
+<p class="text-slate-600 text-sm">按照学院安排前往余区校医院进行新生入学体检。</p>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-blue-600 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">5</div>
+<div class="w-[calc(100%-4rem)] md:w-[45%] p-6 rounded-2xl border border-slate-100 bg-slate-50 shadow-sm">
+<h4 class="font-bold text-blue-600 mb-1">入学教育周</h4>
+<p class="text-slate-600 text-sm">参加开学典礼、专业介绍会及各类安全与纪律教育活动。</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 3. 宿舍信息 ==================== -->
+<section class="content-section" id="dorm">
+<div class="flex items-center gap-4 mb-8" style="opacity: 1;">
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors" onclick="showSection('home')">
+<iconify-icon icon="mdi:arrow-left" width="24"></iconify-icon>
+</button>
+<h2 class="text-3xl font-bold">宿舍环境与规定</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 overflow-hidden">
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-blue-600" icon="mdi:table"></iconify-icon>
+楼栋设施对比
+</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 text-slate-500 text-sm uppercase">
+<tr>
+<th class="px-4 py-3 font-semibold">楼栋</th>
+<th class="px-4 py-3 font-semibold">人数</th>
+<th class="px-4 py-3 font-semibold">独立卫浴</th>
+<th class="px-4 py-3 font-semibold">阳台</th>
+<th class="px-4 py-3 font-semibold">特色</th>
+<th class="px-4 py-3 font-semibold">实拍</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr>
+<td class="px-4 py-4 font-medium">余14舍</td>
+<td class="px-4 py-4">6人</td>
+<td class="px-4 py-4 text-red-500">❌ 无</td>
+<td class="px-4 py-4 text-red-500">❌ 无</td>
+<td class="px-4 py-4 text-sm">楼下洗衣房、小柜子</td>
+<td class="px-4 py-4"><button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full text-xs font-medium transition-colors" onclick="openDormModalYu14()"><iconify-icon class="inline mr-1" icon="mdi:image-multiple-outline" width="12"></iconify-icon>查看实拍</button></td>
+</tr>
+<tr>
+<td class="px-4 py-4 font-medium">余1-4舍</td>
+<td class="px-4 py-4">6人</td>
+<td class="px-4 py-4 text-emerald-500">✅ 有</td>
+<td class="px-4 py-4" style="color: rgb(16, 185, 129);">✅ 有</td>
+<td class="px-4 py-4 text-sm">经典六人寝</td>
+<td class="px-4 py-4"><button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full text-xs font-medium transition-colors" onclick="openDormModalYu14_2()"><iconify-icon class="inline mr-1" icon="mdi:image-multiple-outline" width="12"></iconify-icon>查看实拍</button></td>
+</tr>
+<tr>
+<td class="px-4 py-4 font-medium">余7-8舍</td>
+<td class="px-4 py-4">4人</td>
+<td class="px-4 py-4 text-emerald-500">✅ 有</td>
+<td class="px-4 py-4 text-emerald-500">✅ 有</td>
+<td class="px-4 py-4 text-sm">上床下桌、条件最好</td>
+<td class="px-4 py-4"><button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full text-xs font-medium transition-colors" onclick="openDormModal()"><iconify-icon class="inline mr-1" icon="mdi:image-multiple-outline" width="12"></iconify-icon>查看实拍</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-4 p-4 bg-blue-50 rounded-xl text-blue-700 text-sm flex gap-2">
+<iconify-icon icon="mdi:information-outline" width="20"></iconify-icon>
+<span>所有宿舍均配备空调。床铺标准尺寸 0.9m × 1.9m，有特殊需求可申请加长。</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white p-6 rounded-3xl border border-slate-100">
+<h4 class="font-bold mb-3 flex items-center gap-2">
+<iconify-icon class="text-orange-600" icon="mdi:flash-off"></iconify-icon>
+电器限制
+</h4>
+<ul class="text-slate-600 text-sm space-y-2">
+<li>• 禁止大功率发热电器（电饭锅、卷发棒、吹风机等）</li>
+<li>• 单个寝室用电功率上限 <b>500W</b></li>
+<li>• 违规电器将被没收并记录</li>
+</ul>
+</div>
+<div class="bg-white p-6 rounded-3xl border border-slate-100">
+<h4 class="font-bold mb-3 flex items-center gap-2">
+<iconify-icon class="text-indigo-600" icon="mdi:clock-outline"></iconify-icon>
+作息与管理
+</h4>
+<ul class="text-slate-600 text-sm space-y-2">
+<li>• 熄灯时间：周日至周一晚 11:00</li>
+<li>• 允许安装床帘以保护个人隐私</li>
+<li>• 宿舍管理单位：海虹学生社区管委会</li>
+</ul>
+</div>
+</div>
+<!-- ===== 新增：宿舍管理须知 ===== -->
+<div class="bg-white p-6 rounded-3xl border border-slate-100">
+<h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-blue-600" icon="mdi:clipboard-list-outline"></iconify-icon>
+宿舍管理须知
+</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 bg-slate-50 rounded-2xl flex items-start gap-3">
+<iconify-icon class="text-blue-600 flex-shrink-0 mt-0.5" icon="mdi:bed-king-outline" width="20"></iconify-icon>
+<div>
+<h5 class="font-bold text-sm mb-1">床铺尺寸</h5>
+<p class="text-xs text-slate-600">标准尺寸 0.9m × 1.9m，可申请加长床位</p>
+</div>
+</div>
+<div class="p-4 bg-slate-50 rounded-2xl flex items-start gap-3">
+<iconify-icon class="text-orange-600 flex-shrink-0 mt-0.5" icon="mdi:flash-off" width="20"></iconify-icon>
+<div>
+<h5 class="font-bold text-sm mb-1">功率限制</h5>
+<p class="text-xs text-slate-600">限 500W，禁止使用大功率发热电器（锅、卷发棒、吹风机等均不可）</p>
+</div>
+</div>
+<div class="p-4 bg-slate-50 rounded-2xl flex items-start gap-3">
+<iconify-icon class="text-indigo-600 flex-shrink-0 mt-0.5" icon="mdi:weather-night" width="20"></iconify-icon>
+<div>
+<h5 class="font-bold text-sm mb-1">熄灯时间</h5>
+<p class="text-xs text-slate-600">周日至周四晚 11 点熄灯，周五周六延长（具体以各楼栋通知为准）</p>
+</div>
+</div>
+<div class="p-4 bg-slate-50 rounded-2xl flex items-start gap-3">
+<iconify-icon class="text-emerald-600 flex-shrink-0 mt-0.5" icon="mdi:curtains" width="20"></iconify-icon>
+<div>
+<h5 class="font-bold text-sm mb-1">床帘</h5>
+<p class="text-xs text-slate-600">可以装床帘，保障个人隐私</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== 新增：洗衣服务信息 ===== -->
+<div class="bg-white p-6 rounded-3xl border border-slate-100">
+<h4 class="text-xl font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-blue-600" icon="mdi:washing-machine"></iconify-icon>
+洗衣服务信息
+</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 bg-blue-50 rounded-2xl flex items-start gap-3">
+<iconify-icon class="text-blue-600 flex-shrink-0 mt-0.5" icon="mdi:room-service-outline" width="20"></iconify-icon>
+<div>
+<h5 class="font-bold text-sm mb-1">余14舍洗衣房</h5>
+<p class="text-xs text-slate-600">楼下设有洗衣房，扫码支付使用，方便日常洗衣</p>
+</div>
+</div>
+<div class="p-4 bg-blue-50 rounded-2xl flex items-start gap-3">
+<iconify-icon class="text-blue-600 flex-shrink-0 mt-0.5" icon="mdi:stairs" width="20"></iconify-icon>
+<div>
+<h5 class="font-bold text-sm mb-1">高层洗衣机</h5>
+<p class="text-xs text-slate-600">高楼层每层配有两台洗衣机</p>
+</div>
+</div>
+<div class="p-4 bg-blue-50 rounded-2xl flex items-start gap-3 md:col-span-2">
+<iconify-icon class="text-blue-600 flex-shrink-0 mt-0.5" icon="mdi:information-outline" width="20"></iconify-icon>
+<div>
+<h5 class="font-bold text-sm mb-1">其他宿舍区</h5>
+<p class="text-xs text-slate-600">同样配备公共洗衣设施，详情请咨询各楼栋宿管</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 侧边栏 -->
+<div class="space-y-6">
+<div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100">
+<img alt="Dormitory interior showing bunk beds with desks" class="w-full h-48 object-cover" src="https://modao.cc/agent-py/media/liurenqin.jpg"/>
+<div class="p-4">
+<p class="text-sm font-medium">六人寝内部（余1-4舍示例）</p>
+<p class="text-xs text-slate-400 mt-1">配备空调与独立卫浴</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 4. 食堂美食 ==================== -->
+<section class="content-section" id="food">
+<div class="flex items-center gap-4 mb-8">
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors" onclick="showSection('home')">
+<iconify-icon icon="mdi:arrow-left" width="24"></iconify-icon>
+</button>
+<h2 class="text-3xl font-bold">校园美食地图</h2>
+</div>
+<div class="flex gap-4 mb-8 border-b border-slate-200">
+<button class="food-tab px-6 py-3 font-bold transition-all active-tab" id="tab-canteen1" onclick="switchFoodTab('canteen1')">水运一食堂</button>
+<button class="food-tab px-6 py-3 font-bold hover:text-slate-600 transition-all text-slate-400" id="tab-canteen2" onclick="switchFoodTab('canteen2')">水运二食堂</button>
+<button class="food-tab px-6 py-3 font-bold hover:text-slate-600 transition-all text-slate-400" id="tab-canteen3" onclick="switchFoodTab('canteen3')">学生三食堂</button>
+</div>
+<!-- 一食堂 -->
+<div class="food-content space-y-8" id="content-canteen1">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-24 h-24 rounded-2xl flex-shrink-0 overflow-hidden border border-slate-200">
+<img alt="Water Transport Canteen 1 building exterior with yellow signage and green glass door entrance" class="w-full h-full object-cover" src="https://modao.cc/agent-py/media/user_assets/2026-06-05/16e012f6b2904169aec5e3fa5421be7c.png"/>
+</div>
+<div>
+<p class="text-xs text-slate-400">水运一食堂建筑外观，上方悬挂醒目的黄色大字招牌"水运一食堂"，下方是带有绿色标识的玻璃大门入口，建筑周围绿树环绕。</p>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">1F</span>
+一楼档口
+</h3>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('puffalo')">
+<div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon class="" icon="mdi:cupcake" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">菠芙乐烘培工坊</h4>
+<p class="text-[10px] text-slate-400 mt-1">蛋挞面包甜点</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('malatang')">
+<div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:fire" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">品中食尚·麻辣烫</h4>
+<p class="text-[10px] text-slate-400 mt-1">自选称重超50种菜品</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('yangji')">
+<div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-2" style="opacity: 1;">
+<iconify-icon class="" icon="mdi:fire" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">杨记麻辣烫</h4>
+<p class="text-[10px] text-slate-400 mt-1">称重自选荤素同价</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('haomian')">
+<div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:noodles" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">好面道</h4>
+<p class="text-[10px] text-slate-400 mt-1">拌面热干面牛肉面</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('yangzas')">
+<div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:rice" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">羊杂面</h4>
+<p class="text-[10px] text-slate-400 mt-1">羊杂面</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('wojia')">
+<div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:chef-hat" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">我家私房菜</h4>
+<p class="text-[10px] text-slate-400 mt-1">1-8元分区小炒</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('lvshuany')">
+<div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:silverware" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">绿膳苑</h4>
+<p class="text-[10px] text-slate-400 mt-1">盖浇饭炒菜干锅</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('yunixy')">
+<div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:food-turkey" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">与你湘约</h4>
+<p class="text-[10px] text-slate-400 mt-1">卤味自选套餐</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('guangshic')">
+<div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:tea" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">广式早茶</h4>
+<p class="text-[10px] text-slate-400 mt-1">肠粉豆花</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('jiaweix')">
+<div class="w-12 h-12 bg-cyan-100 text-cyan-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:food-drumstick" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">甲味轩</h4>
+<p class="text-[10px] text-slate-400 mt-1">馄饨锅贴</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('baijianby')">
+<div class="w-12 h-12 bg-lime-100 text-lime-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:food-croissant" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">百煎不厌</h4>
+<p class="text-[10px] text-slate-400 mt-1">沙拉煎饼烤冷面</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('youhu')">
+<div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:chips" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">油魂炸货铺</h4>
+<p class="text-[10px] text-slate-400 mt-1">各类炸物</p>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">2F</span>
+二楼档口
+</h3>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('mofan')">
+<div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:bowl-mix" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">魔饭青年</h4>
+<p class="text-[10px] text-slate-400 mt-1">特色盖饭系列</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('mishu')">
+<div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:bowl-mix-outline" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">米叔擂饭</h4>
+<p class="text-[10px] text-slate-400 mt-1">湖南特色擂饭</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('lajiao')">
+<div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:chili-mild" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">辣椒炒肉</h4>
+<p class="text-[10px] text-slate-400 mt-1">湘味小炒</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('dongbei')">
+<div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:stove" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">东北味道</h4>
+<p class="text-[10px] text-slate-400 mt-1">东北风味菜</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('yueshi')">
+<div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:food" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">粤式烧腊饭</h4>
+<p class="text-[10px] text-slate-400 mt-1">正宗烧腊双拼</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('kaopan')">
+<div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:grill" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">烤盘饭</h4>
+<p class="text-[10px] text-slate-400 mt-1">铁板烤盘饭</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('xinlong')">
+<div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:pot-steam" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">新龙亿鸡公煲</h4>
+<p class="text-[10px] text-slate-400 mt-1">经典鸡公煲</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('suancai')">
+<div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:fish" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">招牌酸菜鱼&amp;秘制瓦香鸡</h4>
+<p class="text-[10px] text-slate-400 mt-1">单人份酸菜鱼瓦香鸡</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 二食堂 -->
+<div class="food-content space-y-8 hidden" id="content-canteen2">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-24 h-24 rounded-2xl flex-shrink-0 overflow-hidden border border-slate-200">
+<img alt="Water Transport Canteen 2 building exterior with black signage and red LED display" class="w-full h-full object-cover" src="https://modao.cc/agent-py/media/user_assets/2026-06-05/fe10fc9d90954db08ddd1f4146c83724.png"/>
+</div>
+<div>
+<p class="text-xs text-slate-400">水运二食堂建筑外景。</p>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm">1F</span>
+一楼档口
+</h3>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('regamian')">
+<div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:noodles" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">武汉热干面</h4>
+<p class="text-[10px] text-slate-400 mt-1">热干面拌面炒面汤面</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('maokaya')">
+<div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:fire" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">成都冒烤鸭</h4>
+<p class="text-[10px] text-slate-400 mt-1">冒菜主锅热辣鲜香</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('jiangxin')">
+<div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:rice" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">匠心卤热卤拌饭</h4>
+<p class="text-[10px] text-slate-400 mt-1">卤肉饭双拼套餐</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('mazip')">
+<div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:silverware-fork-knife" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">长沙码子粉+面</h4>
+<p class="text-[10px] text-slate-400 mt-1">汤粉拌面油泼面</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('tangshui')">
+<div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:cup" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">糖水粥铺</h4>
+<p class="text-[10px] text-slate-400 mt-1">粥品糖水饮品</p>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm">2F</span>
+二楼档口
+</h3>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('kaoli')">
+<div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:coffee" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">烤梨先生&amp;壹家茶水</h4>
+<p class="text-[10px] text-slate-400 mt-1">柠檬茶咖啡奶茶</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('luosifen')">
+<div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:pot-mix" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">柳州螺蛳粉</h4>
+<p class="text-[10px] text-slate-400 mt-1">螺蛳粉桂林米粉</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('xiaochanz')">
+<div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:bowl-mix" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">小谗嘴炒饭</h4>
+<p class="text-[10px] text-slate-400 mt-1">炒饭炒米粉</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('yueleiy')">
+<div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:chili-mild" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">悦擂悦湘</h4>
+<p class="text-[10px] text-slate-400 mt-1">湖南小炒肉</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('waxiang')">
+<div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:pot-steam" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">瓦县鸡米饭</h4>
+<p class="text-[10px] text-slate-400 mt-1">瓦香鸡</p>
+</div>
+<div class="food-icon-card bg-white p-4 rounded-2xl border border-slate-100 flex flex-col items-center text-center" onclick="openFoodModal('huangmen')">
+<div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-2">
+<iconify-icon icon="mdi:rice" width="24"></iconify-icon>
+</div>
+<h4 class="text-sm font-bold">黄焖鸡米饭</h4>
+<p class="text-[10px] text-slate-400 mt-1">黄焖鸡新疆炒米粉</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 三食堂 -->
+<div class="food-content space-y-8 hidden" id="content-canteen3">
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+<div class="flex flex-col items-center text-center">
+<div class="w-full mb-4">
+<img alt="学生三食堂外观 - AI美化版" class="w-full rounded-xl shadow-sm" src="https://modao.cc/agent-py/media/user_assets/2026-06-05/98931b85bb9748c6bd5a109c89cfd1e7.png" style="max-width:100%; height:auto; max-height:250px; object-fit:cover;"/>
+<p class="text-xs text-gray-500 text-center mt-1">学生三食堂 - 灰白色单层建筑，金色招牌</p>
+</div>
+<div class="px-2 w-full text-left">
+</div>
+</div>
+</div>
+<!-- 三食堂档口菜单 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+<h4 class="font-bold text-lg mb-3 flex items-center gap-2">
+<iconify-icon class="text-green-600" icon="mdi:silverware-variant"></iconify-icon>
+自选菜区（13号小碗菜）
+</h4>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="p-2 bg-blue-50 rounded-xl text-center font-medium text-blue-700">蓝色 3元</div>
+<div class="p-2 bg-red-50 rounded-xl text-center font-medium text-red-700">红色 4元</div>
+<div class="p-2 bg-gray-50 rounded-xl text-center font-medium text-gray-700">白色 5元</div>
+<div class="p-2 bg-yellow-50 rounded-xl text-center font-medium text-yellow-700">黄色 6元</div>
+<div class="p-2 bg-green-50 rounded-xl text-center font-medium text-green-700 col-span-2">绿色 7元</div>
+</div>
+</div>
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+<h4 class="font-bold text-lg mb-3 flex items-center gap-2">
+<iconify-icon class="text-amber-600" icon="mdi:bread-slice-outline"></iconify-icon>
+早餐面点
+</h4>
+<ul class="space-y-2 text-sm">
+<li class="flex justify-between p-2 bg-slate-50 rounded-xl"><span>红糖发糕</span><span class="font-bold text-slate-700">2元/块</span></li>
+<li class="flex justify-between p-2 bg-slate-50 rounded-xl"><span>玉米发糕</span><span class="font-bold text-slate-700">2元/块</span></li>
+<li class="flex justify-between p-2 bg-slate-50 rounded-xl"><span>汤圆米酒</span><span class="font-bold text-slate-700">3元/碗</span></li>
+<li class="flex justify-between p-2 bg-slate-50 rounded-xl"><span>红枣玉米羹</span><span class="font-bold text-slate-700">3.5元/碗</span></li>
+</ul>
+</div>
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm md:col-span-2">
+<h4 class="font-bold text-lg mb-3 flex items-center gap-2">
+<iconify-icon class="text-orange-600" icon="mdi:noodles"></iconify-icon>
+新疆炒米粉系列
+</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+<div class="p-3 bg-orange-50 rounded-xl text-center">
+<p class="font-bold text-sm">火腿炒米粉 + 馕</p>
+<p class="text-orange-700 font-bold">15元</p>
+</div>
+<div class="p-3 bg-orange-50 rounded-xl text-center">
+<p class="font-bold text-sm">肥肠炒米粉 + 馕</p>
+<p class="text-orange-700 font-bold">16元</p>
+</div>
+<div class="p-3 bg-orange-50 rounded-xl text-center">
+<p class="font-bold text-sm">炒馕</p>
+<p class="text-orange-700 font-bold">12元</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 justify-center">
+<span class="px-3 py-1 bg-slate-100 rounded-full text-sm text-slate-600">不辣</span>
+<span class="px-3 py-1 bg-slate-100 rounded-full text-sm text-slate-600">微辣</span>
+<span class="px-3 py-1 bg-red-50 text-red-600 rounded-full text-sm font-medium">中辣</span>
+<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">特辣</span>
+</div>
+<p class="text-xs text-slate-400 text-center mt-3">口味可选</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 5. 社团组织 ==================== -->
+<section class="content-section" id="club">
+<div class="flex items-center gap-4 mb-8">
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors" onclick="showSection('home')">
+<iconify-icon icon="mdi:arrow-left" width="24"></iconify-icon>
+</button>
+<h2 class="text-3xl font-bold">学生组织与社团</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-blue-900 text-white p-6 rounded-3xl">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-yellow-400" icon="mdi:star"></iconify-icon>
+校级直属组织
+</h3>
+<div class="space-y-4">
+<div class="border-l-2 border-blue-400 pl-3">
+<h4 class="font-semibold text-sm">余区校学生会</h4>
+<p class="text-xs text-blue-200 mt-1">办公室、学习部、权益部、文艺部、体育部、外联部、宣传部</p>
+</div>
+<div class="border-l-2 border-blue-400 pl-3">
+<h4 class="font-semibold text-sm">校团委各部</h4>
+<p class="text-xs text-blue-200 mt-1">组织部、实践部、双创部、信宣中心</p>
+</div>
+<div class="border-l-2 border-blue-400 pl-3">
+<h4 class="font-semibold text-sm">青年志愿者协会</h4>
+<p class="text-xs text-blue-200 mt-1">志愿服务、公益活动</p>
+</div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-3xl border border-slate-100">
+<h3 class="text-lg font-bold mb-4 text-slate-800">职能部门</h3>
+<div class="space-y-3">
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('studentAffairs')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-blue-600 flex-shrink-0" icon="mdi:office-building" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">学生事务办公室</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('communityCommittee')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-blue-600 flex-shrink-0" icon="mdi:home-group" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">海虹学生社区管委会</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-3xl border border-slate-100">
+<h3 class="text-lg font-bold mb-4 text-slate-800">校学生会部门</h3>
+<div class="space-y-3">
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('studyDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-blue-600 flex-shrink-0" icon="mdi:book-open-page-variant" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">学习部</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('rightsDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-blue-600 flex-shrink-0" icon="mdi:shield-check" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">权益部</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 新增：社团组织部门详情入口 -->
+<div class="bg-white p-6 rounded-3xl border border-slate-100">
+<h3 class="text-lg font-bold mb-4 text-slate-800">学团组织部门详情</h3>
+<div class="space-y-3">
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('jiaowuXinli')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-green-600 flex-shrink-0" icon="mdi:heart-pulse" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">交物心理协会</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('studyDeptFull')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-blue-600 flex-shrink-0" icon="mdi:book-open-page-variant" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">学习部（详细）</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('rightsDeptFull')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-blue-600 flex-shrink-0" icon="mdi:shield-check" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">权益部（详细）</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('wenyiDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-pink-600 flex-shrink-0" icon="mdi:theater" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">文艺部</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('tiyuDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-orange-600 flex-shrink-0" icon="mdi:basketball" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">体育部</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('wailianDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-amber-600 flex-shrink-0" icon="mdi:handshake" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">外联部</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('xuanchuanDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-indigo-600 flex-shrink-0" icon="mdi:camera" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">宣传部</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('zuzhiDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-blue-800 flex-shrink-0" icon="mdi:account-tree" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">组织部</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('shijianDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-teal-600 flex-shrink-0" icon="mdi:compass" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">实践部</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('shuangchuangDept')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-purple-600 flex-shrink-0" icon="mdi:lightbulb-on-outline" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">双创部（创新创业部）</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('xinxuanCenter')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-cyan-600 flex-shrink-0" icon="mdi:share-variant" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">信宣中心</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+<div class="club-card p-3 bg-slate-50 rounded-xl hover:bg-blue-50 hover:shadow-sm transition-all cursor-pointer" onclick="openClubModal('qingxie')">
+<div class="flex items-center gap-2">
+<iconify-icon class="text-emerald-600 flex-shrink-0" icon="mdi:hand-heart" width="20"></iconify-icon>
+<div>
+<h4 class="text-sm font-bold">青年志愿者协会</h4>
+<p class="text-xs text-slate-500 mt-1">点击查看详情</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-3 space-y-8">
+<div>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-blue-600" icon="mdi:domain"></iconify-icon>
+二级学院团学组织
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-white p-5 rounded-2xl border border-slate-100">
+<h4 class="font-bold text-blue-900">交通与物流工程学院</h4>
+<p class="text-xs text-slate-500 mt-2">团委五大部、心理协会、物流/交通科技协会</p>
+</div>
+<div class="bg-white p-5 rounded-2xl border border-slate-100">
+<h4 class="font-bold text-blue-900">航运与海事学院</h4>
+<p class="text-xs text-slate-500 mt-2">半军事化管理部、航海技术/海事法律协会</p>
+</div>
+<div class="bg-white p-5 rounded-2xl border border-slate-100">
+<h4 class="font-bold text-blue-900">物理与力学学院</h4>
+<p class="text-xs text-slate-500 mt-2">学术科技部、天文/建模协会</p>
+</div>
+<div class="bg-white p-5 rounded-2xl border border-slate-100">
+<h4 class="font-bold text-blue-900">材料科学与工程学院</h4>
+<p class="text-xs text-slate-500 mt-2">材料创新部、焊接/新能源材料协会</p>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-red-500" icon="mdi:heart-pulse"></iconify-icon>
+跨学院通用社团
+</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="club-card bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-2xl text-center hover:shadow-md hover:scale-[1.02] transition-all group" onclick="openClubModal('academic')">
+<iconify-icon class="text-blue-600 mb-2 transition-transform group-hover:scale-110" icon="mdi:robot" width="28"></iconify-icon>
+<h5 class="text-sm font-bold">学术科技类</h5>
+<p class="text-[10px] text-slate-400 mt-1">数学建模·机器人·AI编程</p>
+</div>
+<div class="club-card bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-2xl text-center hover:shadow-md hover:scale-[1.02] transition-all group" onclick="openClubModal('culture')">
+<iconify-icon class="text-purple-600 mb-2 transition-transform group-hover:scale-110" icon="mdi:palette" width="28"></iconify-icon>
+<h5 class="text-sm font-bold">文化艺术类</h5>
+<p class="text-[10px] text-slate-400 mt-1">辩论·书法摄影·动漫</p>
+</div>
+<div class="club-card bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-2xl text-center hover:shadow-md hover:scale-[1.02] transition-all group" onclick="openClubModal('sports')">
+<iconify-icon class="text-orange-600 mb-2 transition-transform group-hover:scale-110" icon="mdi:basketball" width="28"></iconify-icon>
+<h5 class="text-sm font-bold">体育竞技类</h5>
+<p class="text-[10px] text-slate-400 mt-1">球类·游泳·武术</p>
+</div>
+<div class="club-card bg-gradient-to-br from-emerald-50 to-teal-50 p-4 rounded-2xl text-center hover:shadow-md hover:scale-[1.02] transition-all group" onclick="openClubModal('public')">
+<iconify-icon class="text-emerald-600 mb-2 transition-transform group-hover:scale-110" icon="mdi:hand-heart" width="28"></iconify-icon>
+<h5 class="text-sm font-bold">公益实践类</h5>
+<p class="text-[10px] text-slate-400 mt-1">爱心社·支教团·法律援助</p>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-3xl">
+<h3 class="text-lg font-bold mb-4 text-blue-900">重点五星特色社团</h3>
+<div class="flex flex-wrap gap-3">
+<div class="club-card bg-white px-5 py-3 rounded-2xl text-sm font-medium shadow-sm border border-blue-100 hover:shadow-md hover:bg-blue-50 cursor-pointer flex items-center gap-2 transition-all" onclick="openClubModal('star1')">
+<iconify-icon class="text-blue-600" icon="mdi:briefcase" width="20"></iconify-icon>
+<span>创业就业俱乐部</span>
+</div>
+<div class="club-card bg-white px-5 py-3 rounded-2xl text-sm font-medium shadow-sm border border-blue-100 hover:shadow-md hover:bg-blue-50 cursor-pointer flex items-center gap-2 transition-all" onclick="openClubModal('star2')">
+<iconify-icon class="text-blue-600" icon="mdi:star-shooting" width="20"></iconify-icon>
+<span>国防星火社团</span>
+</div>
+<div class="club-card bg-white px-5 py-3 rounded-2xl text-sm font-medium shadow-sm border border-blue-100 hover:shadow-md hover:bg-blue-50 cursor-pointer flex items-center gap-2 transition-all" onclick="openClubModal('star3')">
+<iconify-icon class="text-blue-600" icon="mdi:theater" width="20"></iconify-icon>
+<span>大学生艺术协会(余区分会)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 6. 常见问题 ==================== -->
+<section class="content-section" id="faq">
+<div class="flex items-center gap-4 mb-8">
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors" onclick="showSection('home')">
+<iconify-icon icon="mdi:arrow-left" width="24"></iconify-icon>
+</button>
+<h2 class="text-3xl font-bold">常见问题 (FAQ)</h2>
+</div>
+<div class="max-w-3xl mx-auto space-y-4">
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(1)">
+<span class="font-bold text-left">床铺多大？可以加长吗？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-1" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-1">
+标准尺寸为0.9米×1.9米，如有需要可申请加长服务。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(2)">
+<span class="font-bold text-left">宿舍能用吹风机/卷发棒吗？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-2" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-2">
+宿舍内禁止使用大功率及发热类电器（包括电饭锅、卷发棒、吹风机等），功率上限严格限制在500瓦以内。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(3)">
+<span class="font-bold text-left">可以装床帘吗？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-3" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-3">
+允许安装床帘以保护个人隐私。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(4)">
+<span class="font-bold text-left">熄灯时间是几点？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-4" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-4">
+周日到周一晚上11点熄灯。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(5)">
+<span class="font-bold text-left">宿舍有独立卫浴吗？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-5" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-5">
+各楼栋不同。余1-4舍和余7-8舍有独立卫浴，余14舍无独立卫浴。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(6)">
+<span class="font-bold text-left">功率限制了怎么吹头发？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-6" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-6">
+宿舍楼公共区域一般提供指定插座或公用吹风机，建议在宿舍楼下或浴室公共区域使用。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(7)">
+<span class="font-bold text-left">宿舍怎么分配的？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-7" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-7">
+根据各学院统一分配，一般同学院同班级安排在一起。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(8)">
+<span class="font-bold text-left">食堂有什么推荐的档口？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-8" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-8">
+水运一食堂一楼菠芙乐烘培工坊（蛋挞面包）、好面道（热干面牛肉面）、杨记麻辣烫（称重自选），二楼魔饭青年、粤式烧腊饭；水运二食堂一楼武汉热干面、匠心卤热卤拌饭，二楼柳州螺蛳粉、悦擂悦湘小炒肉。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(9)">
+<span class="font-bold text-left">学校有哪些学生组织和社团可以参加？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-9" width="20"></iconify-icon>
+</button>
+<div class="hidden px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-9">
+校级组织有余区校学生会、校团委各部门、青协等；学术科技类有数学建模、机器人、人工智能协会；文化艺术类有辩论、书法摄影、动漫协会；体育竞技类有篮球足球羽毛球协会、游泳武术协会；公益实践类有爱心社、支教团等。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(10)">
+<span class="font-bold text-left">校区有哪些运动场馆？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-10" width="20"></iconify-icon>
+</button>
+<div class="px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50 hidden" id="faq-ans-10">
+中远海运体能训练中心、大学生活动中心等。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(11)">
+<span class="font-bold text-left">校医院在哪里？</span>
+<iconify-icon icon="mdi:chevron-down" id="faq-icon-11" width="20"></iconify-icon>
+</button>
+<div class="px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50 hidden" id="faq-ans-11">
+校医院位于余14舍（女生宿舍）旁，即余家头校区校医院，方便学生就近就诊。
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+<button class="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleFaq(12)">
+<span class="font-bold text-left">快递在哪里取？</span>
+<iconify-icon icon="mdi:chevron-up" id="faq-icon-12" width="20"></iconify-icon>
+</button>
+<div class="px-6 py-4 text-slate-600 text-sm border-t border-slate-50 bg-slate-50/50" id="faq-ans-12">
+快递取件点分布如下：一食堂（水运一食堂）后有菜鸟驿站和京东收货点、顺丰收货点；部分快递在操场旁的蜜雪冰城旁边的超市里取件。
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 7. 校园生活服务 ==================== -->
+<section class="content-section" id="service">
+<div class="flex items-center gap-4 mb-8">
+<button class="p-2 hover:bg-slate-200 rounded-full transition-colors" onclick="showSection('home')">
+<iconify-icon icon="mdi:arrow-left" width="24"></iconify-icon>
+</button>
+<h2 class="text-3xl font-bold">校园生活服务</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-8">
+<!-- 校区地图区域 -->
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+<h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+<iconify-icon class="text-blue-600" icon="mdi:map-legend"></iconify-icon>
+余家头校区校园地图
+</h3>
+<div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 shadow-md mb-6">
+<h4 class="text-lg font-bold text-slate-700 mb-3 flex items-center gap-2"><span class="text-xl">🗺️</span> 余家头校区校园地图</h4>
+<div class="bg-white rounded-xl overflow-hidden">
+<img alt="余家头校区手绘地图" class="w-full" src="https://modao.cc/agent-py/media/xiaoyuanmap.jpg" style="max-width:100%; height:auto;"/>
+</div>
+<div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+<div class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded-full bg-red-500"></span>教学楼核心建筑</div>
+<div class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded-full bg-yellow-500"></span>院系学院建筑</div>
+<div class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded-full bg-green-500"></span>公共服务设施</div>
+<div class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded-full bg-blue-500"></span>宿舍区及其他</div>
+</div>
+</div>
+<!-- 图例说明 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="map-category-card bg-red-50 border border-red-200">
+<h4 class="font-bold text-red-800 text-sm mb-3 flex items-center gap-1">
+<iconify-icon icon="mdi:school-outline" width="16"></iconify-icon> 🔴 教学楼核心建筑
+</h4>
+<ul class="space-y-1.5 text-xs text-red-700">
+<li>• 余区主楼（第一教学楼）</li>
+<li>• 西配楼（第二教学楼）</li>
+<li>• 东配楼（第三教学楼）</li>
+<li>• 航海楼（第五教学楼）</li>
+<li>• 中远海运体能训练中心</li>
+</ul>
+</div>
+<div class="map-category-card bg-yellow-50 border border-yellow-200">
+<h4 class="font-bold text-yellow-800 text-sm mb-3 flex items-center gap-1">
+<iconify-icon icon="mdi:domain" width="16"></iconify-icon> 🟡 院系学院建筑
+</h4>
+<ul class="space-y-1.5 text-xs text-yellow-700">
+<li>• 交通物流学院</li>
+<li>• 海洋工程系</li>
+<li>• 动力工程系 / 热能工程系</li>
+<li>• 船舶工程系</li>
+<li>• 轮机工程系</li>
+<li>• 航海学院</li>
+<li>• 余15舍（启航书院）</li>
+</ul>
+</div>
+<div class="map-category-card bg-green-50 border border-green-200">
+<h4 class="font-bold text-green-800 text-sm mb-3 flex items-center gap-1">
+<iconify-icon icon="mdi:home-group" width="16"></iconify-icon> 🟢 公共服务设施
+</h4>
+<ul class="space-y-1.5 text-xs text-green-700">
+<li>• 水运一食堂</li>
+<li>• 水运二食堂</li>
+<li>• 第三食堂</li>
+<li>• 余区图书馆</li>
+<li>• 校医院</li>
+<li>• 大学生活动中心</li>
+</ul>
+</div>
+<div class="map-category-card bg-blue-50 border border-blue-200">
+<h4 class="font-bold text-blue-800 text-sm mb-3 flex items-center gap-1">
+<iconify-icon icon="mdi:bed" width="16"></iconify-icon> 🛏️ 宿舍区 &amp; 其他设施
+</h4>
+<ul class="space-y-1.5 text-xs text-blue-700">
+<li>• 海虹学生公寓</li>
+<li>• 余1舍 - 余4舍</li>
+<li>• 余14舍 / 余15舍（启航书院）</li>
+<li>• 研究生宿舍</li>
+<li>• 保卫处 / 社科处</li>
+<li>• 青年园 / 船池 / 理工二桥</li>
+</ul>
+</div>
+</div>
+<p class="text-xs text-slate-400 mt-4 text-center">右上角有"水运湖"作为景观水体，地图采用手绘线条绘制，色彩明快</p>
+</div>
+<!-- 洗衣服务卡片 -->
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-blue-600" icon="mdi:washing-machine"></iconify-icon>
+洗衣服务
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 bg-blue-50 rounded-2xl">
+<iconify-icon class="text-blue-600 mb-2" icon="mdi:room-service-outline" width="24"></iconify-icon>
+<h4 class="font-bold text-sm">余14舍洗衣房</h4>
+<p class="text-xs text-slate-600 mt-1">宿舍楼下设有洗衣房，方便日常洗衣需求。</p>
+</div>
+<div class="p-4 bg-blue-50 rounded-2xl">
+<iconify-icon class="text-blue-600 mb-2" icon="mdi:stairs" width="24"></iconify-icon>
+<h4 class="font-bold text-sm">高楼层洗衣机</h4>
+<p class="text-xs text-slate-600 mt-1">高楼层每层配有两台洗衣机供学生使用。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 右侧服务卡片 -->
+<div class="space-y-6">
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-indigo-600" icon="mdi:office-building"></iconify-icon>
+学院楼分布
+</h3>
+<div class="space-y-3">
+<div class="p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+<h4 class="text-sm font-bold text-indigo-900">船海能动学院大楼</h4>
+<p class="text-[10px] text-indigo-600">港口航道与结构工程系</p>
+</div>
+<div class="p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+<h4 class="text-sm font-bold text-indigo-900">交通物流学院</h4>
+<p class="text-[10px] text-indigo-600">物流工程、交通运输</p>
+</div>
+<div class="p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+<h4 class="text-sm font-bold text-indigo-900">航运学院</h4>
+<p class="text-[10px] text-indigo-600">航海技术、轮机工程</p>
+</div>
+<div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+<h4 class="text-sm font-bold text-slate-700">动力工程系 / 热能工程系</h4>
+</div>
+<div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+<h4 class="text-sm font-bold text-slate-700">船舶工程系 / 海洋工程系</h4>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-emerald-600" icon="mdi:account-group"></iconify-icon>
+宿舍管理
+</h3>
+<p class="text-sm text-slate-600 mb-3">海虹学生社区管委会负责宿舍园区管理与文化建设，包括文明寝室评比、楼栋学生自治、宿舍安全排查、社区文体活动组织。</p>
+<div class="p-3 bg-emerald-50 rounded-xl text-sm text-emerald-700">
+<iconify-icon class="inline mr-1" icon="mdi:information" width="14"></iconify-icon>
+对接场景：宿舍评优、楼栋事务反馈、社区活动报名、安全问题整改
+</div>
+</div>
+<div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<iconify-icon class="text-blue-600" icon="mdi:badge-account"></iconify-icon>
+学生事务
+</h3>
+<p class="text-sm text-slate-600 mb-3">余家头校区学生事务办公室提供一站式学生服务，统筹全校区学生管理、学风建设、评奖评优、违纪处理、就业服务等。</p>
+<div class="p-3 bg-blue-50 rounded-xl text-sm text-blue-700">
+<iconify-icon class="inline mr-1" icon="mdi:information" width="14"></iconify-icon>
+对接场景：学生重大事务办理、校区政策咨询、评优疑难问题、纪律处分对接
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- 底部 -->
+<footer class="bg-white border-t border-slate-200 py-12 px-6 mt-20">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-slate-800 p-2 rounded-lg text-white">
+<iconify-icon icon="mdi:school" width="20"></iconify-icon>
+</div>
+<span class="font-bold text-slate-800">武汉理工大学余家头校区</span>
+</div>
+<p class="text-xs text-slate-400">© 2026 武汉理工大学余家头校区新生导航项目. 基于知识库构建.</p>
+</div>
+</footer>
+<!-- ===== 四人寝实拍模态框 ===== -->
+<div class="modal-overlay" id="dormModal">
+<div class="modal-content">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-bold text-slate-800">余7-8舍 · 四人寝实拍</h3>
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors" onclick="closeDormModal()">
+<iconify-icon class="" icon="mdi:close" width="24"></iconify-icon>
+</button>
+</div>
+<div class="space-y-8">
+<div class="bg-slate-50 rounded-2xl p-4">
+<img alt="Dormitory interior with bunk beds, desks and bookshelves on both sides, a tall blue metal locker on the left, white walls with air conditioning and fluorescent lights, tile floor" class="w-full h-56 object-cover rounded-xl" src="https://modao.cc/agent-py/media/yu78she.jpg"/>
+<p class="text-sm text-slate-600 mt-3">这是一张整洁的学生宿舍内部照片。房间内两侧整齐排列着带有书桌、书架和白色梯子的上下铺床位。左侧立着一个高大的蓝色金属储物柜。房间中央的书桌上倒扣着几把木椅，暗示房间可能正在进行清洁或整理。墙壁洁白，装有空调和日光灯，地面铺设了瓷砖，整体环境显得明亮且功能齐全。</p>
+</div>
+<div class="bg-slate-50 rounded-2xl p-4">
+<img alt="Bright dormitory room with blue bedding and white mosquito nets on bunk beds, a dark red rectangular table with two wooden chairs in the center, a pink suitcase near the bed, white air conditioner on the wall" class="w-full h-56 object-cover rounded-xl" src="https://modao.cc/agent-py/media/yu78she.jpg"/>
+<p class="text-sm text-slate-600 mt-3">这是一张展示明亮整洁的宿舍房间的照片。房间左右两侧整齐排列着带有蓝色床品和白色床帘（蚊帐）的双层床。房间中央摆放着一张深红色的长方形桌子和两把配套的木椅。左侧床边还放有一个粉色的行李箱。正前方的墙壁上方安装有一台白色空调，下方是一扇挂着米色窗帘的大窗户。地面铺设着光洁的白色瓷砖，整体空间显得比较宽敞。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-overlay" id="dormModalYu14">
+<div class="modal-content">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-bold text-slate-800">余14舍 · 六人寝实拍</h3>
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors" onclick="closeDormModalYu14()">
+<iconify-icon class="" icon="mdi:close" width="24"></iconify-icon>
+</button>
+</div>
+<div class="space-y-4">
+<div class="bg-gray-100 rounded-lg p-4">
+<div class="text-sm text-blue-600 font-medium mb-2">📷 实拍照片</div>
+<img alt="余14舍六人寝实拍" class="w-full rounded-lg shadow-md mb-3" src="https://modao.cc/agent-py/media/1234she.jpg" style="max-width:100%; height:auto;"/>
+<p class="text-sm text-gray-600">余14舍六人寝实拍：房间为六人间布局，左右两侧各有一组上下铺床。左侧下铺挂有白色带动物/花卉图案的床帘，上铺配有蓝色床垫，中央为深红色长木桌。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== 余1-4舍六人寝实拍模态框 ===== -->
+<div class="modal-overlay" id="dormModalYu14_2">
+<div class="modal-content">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-bold text-slate-800">余1-4舍 · 六人寝实拍</h3>
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors" onclick="closeDormModalYu14_2()">
+<iconify-icon icon="mdi:close" width="24"></iconify-icon>
+</button>
+</div>
+<div class="space-y-4">
+<div class="bg-gray-100 rounded-lg p-4">
+<div class="text-sm text-blue-600 font-medium mb-2">📷 实拍照片</div>
+<img alt="Dormitory Room 1-4 six-person bedroom real view" class="w-full rounded-lg shadow-md mb-3" src="https://modao.cc/agent-py/media/liurenqin.jpg" style="max-width:100%; height:auto;"/>
+<p class="text-sm text-gray-600">这是一间现代化、整洁的宿舍。房间两侧沿墙排列着上下铺铁架床，每张上铺配有白色金属栏杆和木质床板，下铺区域设计为书桌，桌面为浅棕色木质，配有蓝色抽屉和白色拉手，上方有开放式金属格子书架。每张书桌配有一把简易木椅。床架上有蓝白相间的圆形校徽标志。左侧靠门处有一个蓝绿色（青蓝色）铁皮储物柜。后墙中央有一扇深色门，门两侧有白色储物架。天花板装有长条形荧光灯和空调。地面铺设浅色瓷砖，整个空间明亮宽敞、功能分区合理。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== 食堂档口详情模态框 ===== -->
+<div class="modal-overlay" id="foodModal">
+<div class="modal-content" id="foodModalContent">
+<div class="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto p-6 relative">
+<button class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600" onclick="closeFoodModal()">×</button>
+<div class="flex items-center gap-3 mb-4">
+<iconify-icon class="text-3xl text-blue-600" icon="mdi:noodles"></iconify-icon>
+<div>
+<h3 class="text-xl font-bold text-gray-800">好面道</h3>
+<p class="text-sm text-gray-500">水运一食堂（一楼）</p>
+</div>
+</div>
+<div class="bg-gray-50 rounded-lg p-3 mb-4">
+<img alt="好面道实拍" class="w-full rounded-lg shadow-sm" src="https://modao.cc/agent-py/media/stall_haomian.jpg?s=haomian" style="max-width:100%; height:auto; max-height:400px; object-fit:contain;"/>
+<p class="text-xs text-gray-400 text-center mt-1">📷 好面道实拍</p>
+</div>
+<div class="border-t pt-4">
+<div class="mb-3"><h5 class="font-semibold text-blue-700 text-sm mb-1">拌粉面类</h5><ul class="text-sm text-gray-600 space-y-0.5"><li>• 招牌拌面/粉 7元</li><li>• 红葱油拌面/粉 7元</li><li>• 梅菜拌面/粉 7元</li><li>• 黑鸭拌面/粉 12元</li><li>• 椒麻鸡拌面/粉 12元</li></ul></div><div class="mb-3"><h5 class="font-semibold text-blue-700 text-sm mb-1">热干面类</h5><ul class="text-sm text-gray-600 space-y-0.5"><li>• 热干面小份4元大份5元</li><li>• 炸酱面8元</li><li>• 炸酱热干面9元</li></ul></div><div class="mb-3"><h5 class="font-semibold text-blue-700 text-sm mb-1">配料</h5><ul class="text-sm text-gray-600 space-y-0.5"><li>• 卤蛋1.5元</li><li>• 鸡肉肠3元</li><li>• 卤烤肠2元</li><li>• 卤干子1元</li><li>• 蛋酒3元</li></ul></div><div class="mb-3"><h5 class="font-semibold text-blue-700 text-sm mb-1">特色粉面类</h5><ul class="text-sm text-gray-600 space-y-0.5"><li>• 生烫牛肉面/粉14元</li><li>• 香辣牛肉面/粉14元</li><li>• 绝味肥肠粉/面14元</li><li>• 特色腰子面/粉16元</li><li>• 榨菜肉丝面/粉10元</li></ul></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ===== 社团详情模态框 ===== -->
+<div class="modal-overlay" id="clubModal">
+<div class="modal-content" id="clubModalContent">
+</div>
+</div>
+<script>
+// SPA 切换逻辑
+function showSection(sectionId) {
+document.querySelectorAll('.content-section').forEach(section => {
+section.classList.remove('active');
+});
+const target = document.getElementById(sectionId);
+if (target) {
+target.classList.add('active');
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// 更新导航栏高亮
+document.querySelectorAll('.top-nav-btn').forEach(btn => {
+btn.classList.remove('active');
+});
+const activeBtn = document.querySelector('.top-nav-btn[data-section="' + sectionId + '"]');
+if (activeBtn) activeBtn.classList.add('active');
+}
+
+// 移动端菜单
+function toggleMobileMenu() {
+const menu = document.getElementById('mobileMenu');
+menu.classList.toggle('hidden');
+}
+function hideMobileMenu() {
+document.getElementById('mobileMenu').classList.add('hidden');
+}
+
+// 食堂 Tab 切换
+function switchFoodTab(tabId) {
+document.querySelectorAll('.food-tab').forEach(tab => {
+tab.classList.remove('active-tab');
+tab.classList.add('text-slate-400');
+});
+const activeTab = document.getElementById('tab-' + tabId);
+if (activeTab) {
+activeTab.classList.add('active-tab');
+activeTab.classList.remove('text-slate-400');
+}
+document.querySelectorAll('.food-content').forEach(content => {
+content.classList.add('hidden');
+});
+const targetContent = document.getElementById('content-' + tabId);
+if (targetContent) targetContent.classList.remove('hidden');
+}
+
+// FAQ 折叠逻辑
+function toggleFaq(id) {
+const ans = document.getElementById('faq-ans-' + id);
+const icon = document.getElementById('faq-icon-' + id);
+if (ans.classList.contains('hidden')) {
+ans.classList.remove('hidden');
+if (icon) icon.setAttribute('icon', 'mdi:chevron-up');
+} else {
+ans.classList.add('hidden');
+if (icon) icon.setAttribute('icon', 'mdi:chevron-down');
+}
+}
+
+// 四人寝实拍模态框
+function openDormModal() {
+document.getElementById('dormModal').classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+function closeDormModal() {
+document.getElementById('dormModal').classList.remove('active');
+document.body.style.overflow = '';
+}
+
+// 余14舍六人寝实拍模态框
+function openDormModalYu14() {
+document.getElementById('dormModalYu14').classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+function closeDormModalYu14() {
+document.getElementById('dormModalYu14').classList.remove('active');
+document.body.style.overflow = '';
+}
+
+// 余1-4舍六人寝实拍模态框
+function openDormModalYu14_2() {
+document.getElementById('dormModalYu14_2').classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+function closeDormModalYu14_2() {
+document.getElementById('dormModalYu14_2').classList.remove('active');
+document.body.style.overflow = '';
+}
+
+// 食堂档口详情数据
+const foodDetails = {
+    puffalo: {
+        name: '菠芙乐烘培工坊',
+        desc: '水运一食堂（一楼）烘焙档口',
+        icon: 'mdi:cupcake',
+        img: '/agent-py/media/stall_bofule.jpg?s=bofule',
+        items: [
+            { cat: '冰淇淋甜品类', list: ['香草甜筒 7.5元'] },
+            { cat: '蛋挞酥饼类', list: ['原味蛋挞单个4.5元 / 3个11元', '枣泥方酥 3.5元', '山楂方酥 3.5元', '鲜花饼 3.5元', '绿豆饼3枚5.5元', '绿豆冰糕4枚11.9元', '灌浆曲奇 4元'] },
+            { cat: '面包餐点类', list: ['奶香片单片4.5元 / 3片11元', '蓝莓奶酪包 11.9元', '培根肉松卷 10.9元'] }
+        ]
+    },
+    malatang: {
+        name: '品中食尚·麻辣烫',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:fire',
+        img: '/agent-py/media/stall_haomian.jpg?s=haomian',
+        items: [
+            { cat: '自选称重', list: ['自选称重麻辣烫，超50种荤素菜品任选'] },
+            { cat: '菜品推荐', list: ['香菜、茼蒿、红苕皮、紫甘蓝、土豆、藕片、西兰花、玉米', '鹌鹑蛋、鱼丸、狮子头、龙虾球、凤爪、鸡翅中、鸡腿', '方便面、手工面、年糕等主食可选'] },
+            { cat: '饮品系列', list: ['原味豆浆 1.8元', '冰豆浆 2.5元', '绿豆沙 3.0元'] }
+        ]
+    },
+    yangji: {
+        name: '杨记麻辣烫',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:fire',
+        img: '/agent-py/media/stall_yangji.jpg?s=yangji',
+        items: [
+            { cat: '称重售卖', list: ['荤素同价 1.78元/两'] },
+            { cat: '口味选择', list: ['骨汤汤底', '番茄味汤底', '麻辣拌'] }
+        ]
+    },
+    haomian: {
+        name: '好面道',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:noodles',
+        img: '/agent-py/media/stall_haomian.jpg?s=haomian',
+        items: [
+            { cat: '拌粉面类', list: ['招牌拌面/粉 7元', '红葱油拌面/粉 7元', '梅菜拌面/粉 7元', '黑鸭拌面/粉 12元', '椒麻鸡拌面/粉 12元'] },
+            { cat: '热干面类', list: ['热干面小份4元大份5元', '炸酱面8元', '炸酱热干面9元'] },
+            { cat: '配料', list: ['卤蛋1.5元', '鸡肉肠3元', '卤烤肠2元', '卤干子1元', '蛋酒3元'] },
+            { cat: '特色粉面类', list: ['生烫牛肉面/粉14元', '香辣牛肉面/粉14元', '绝味肥肠粉/面14元', '特色腰子面/粉16元', '榨菜肉丝面/粉10元'] }
+        ]
+    },
+    yangzas: {
+        name: '羊杂面',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:noodles',
+        img: '/agent-py/media/stall_yangzas.jpg?s=yangzas',
+        items: [
+            { cat: '面食', list: ['羊杂面（供应各类羊杂面）'] }
+        ]
+    },
+    wojia: {
+        name: '我家私房菜',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:rice',
+        img: '/agent-py/media/stall_wojia.jpg?s=wojia',
+        items: [
+            { cat: '价格分区', list: ['1-8元分区的小炒', '手撕包菜', '酸辣土豆丝', '糖醋里脊', '宫保鸡丁', '五香牛肉', '各式家常菜'] }
+        ]
+    },
+    lvshuany: {
+        name: '绿膳苑',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:silverware-fork-knife',
+        img: '/agent-py/media/stall_lvshuany.jpg?s=lvshuany',
+        items: [
+            { cat: '盖浇饭类', list: ['鱼香肉丝盖浇饭14元', '爆炒猪肝盖浇饭12.18元', '土豆片炒肉盖浇饭14元', '腐竹肉丝盖浇饭14元', '农家小炒肉盖浇饭16元', '香干腊肉盖浇饭14.16元', '肉沫茄子盖浇饭14元', '青椒炒肉丝盖浇饭14元', '青椒腊肉盖浇饭16元', '香干炒肉盖浇饭14元', '土豆片回锅肉盖浇饭16元', '木耳肉丝盖浇饭14元', '鱼香茄子盖浇饭15元', '茄子豆角盖浇饭13元', '西红柿炒蛋盖浇饭13元', '红烧茄子盖浇饭13元', '手撕包菜盖浇饭8.5元', '酸辣土豆丝盖浇饭10元', '外婆菜炒蛋盖浇饭11.31元', '韭菜炒蛋盖浇饭13元'] },
+            { cat: '单点炒菜类', list: ['野山椒牛肉28元', '爆炒猪肝21元', '青椒炒肉丝21元', '土豆片回锅肉24元', '农家一碗香24元', '农家小炒肉24元', '肉沫茄子21元', '香干炒肉21元', '土豆片炒肉21元', '胡萝卜肉丝21元'] }
+        ]
+    },
+    yunixy: {
+        name: '与你湘约',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:food-variant',
+        img: '/agent-py/media/stall_yunixy.jpg?s=yunixy',
+        items: [
+            { cat: '卤味自选套餐', list: ['卤味自选套餐（各式卤味配饭）'] }
+        ]
+    },
+    guangshic: {
+        name: '广式早茶',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:tea',
+        img: '/agent-py/media/stall_guangshic.jpg?s=guangshic',
+        items: [
+            { cat: '早茶', list: ['肠粉', '豆花'] }
+        ]
+    },
+    jiaweix: {
+        name: '甲味轩',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:food-drumstick',
+        img: '/agent-py/media/stall_jiaweix.jpg?s=jiaweix',
+        items: [
+            { cat: '馄饨锅贴', list: ['馄饨', '锅贴'] }
+        ]
+    },
+    baijianby: {
+        name: '百煎不厌',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:food-croissant',
+        img: '/agent-py/media/stall_baijianby.jpg?s=baijianby',
+        items: [
+            { cat: '煎饼类', list: ['沙拉煎饼', '烤冷面'] }
+        ]
+    },
+    youhu: {
+        name: '油魂炸货铺',
+        desc: '水运一食堂（一楼）',
+        icon: 'mdi:food-fried-chicken',
+        img: '/agent-py/media/stall_youhu.jpg?s=youhu',
+        items: [
+            { cat: '炸物', list: ['各类炸物（炸鸡柳、炸薯条等）'] }
+        ]
+    },
+    mofan: {
+        name: '魔饭青年',
+        desc: '水运一食堂（二楼）',
+        icon: 'mdi:rice',
+        img: '/agent-py/media/stall_mofan.jpg?s=mofan',
+        items: [
+            { cat: '盖饭', list: ['主打盖饭系列'] }
+        ]
+    },
+    mishu: {
+        name: '米叔擂饭',
+        desc: '水运一食堂（二楼）',
+        icon: 'mdi:rice',
+        img: '/agent-py/media/stall_mishu.jpg?s=mishu',
+        items: [
+            { cat: '擂饭', list: ['米叔擂饭系列'] }
+        ]
+    },
+    lajiao: {
+        name: '辣椒炒肉',
+        desc: '水运一食堂（二楼）',
+        icon: 'mdi:chili',
+        img: '/agent-py/media/stall_lajiao.jpg?s=lajiao',
+        items: [
+            { cat: '辣椒炒肉系列', list: ['辣椒炒肉(理工水运一食堂店) 9元起'] }
+        ]
+    },
+    dongbei: {
+        name: '东北味道',
+        desc: '水运一食堂（二楼）',
+        icon: 'mdi:food',
+        img: '/agent-py/media/stall_dongbei.jpg?s=dongbei',
+        items: [
+            { cat: '东北菜', list: ['东北特色菜系列'] }
+        ]
+    },
+    yueshi: {
+        name: '粤式烧腊饭',
+        desc: '水运一食堂（二楼）',
+        icon: 'mdi:food-drumstick',
+        img: '/agent-py/media/stall_yueshi.jpg?s=yueshi',
+        items: [
+            { cat: '烧腊饭', list: ['烧鸭拼叉烧饭', '蜜汁叉烧饭15元', '招牌烤鸭饭8元', '梅酱鸭腿饭8元', '蜜汁鸡腿饭8元', '单点广式腊肠2元', '单点蜜汁鸡腿9元', '单点梅酱鸭腿9元', '单点半只烧鸭38元'] }
+        ]
+    },
+    kaopan: {
+        name: '烤盘饭',
+        desc: '水运一食堂（二楼）',
+        icon: 'mdi:pot',
+        img: '/agent-py/media/stall_kaopan.jpg?s=kaopan',
+        items: [
+            { cat: '自选称重', list: ['9.9元/3两（荤素任意选，另送三两原料菜）'] },
+            { cat: '套餐', list: ['土豆片烤盘饭7元', '菜花烤盘饭8元', '鸡柳土豆片10元', '鸡柳豆腐泡10元'] },
+            { cat: '米饭', list: ['米饭1元'] }
+        ]
+    },
+    xinlong: {
+        name: '新龙亿鸡公煲',
+        desc: '水运一食堂（二楼）',
+        icon: 'mdi:pot-steam',
+        img: '/agent-py/media/stall_xinlong.jpg?s=xinlong',
+        items: [
+            { cat: '煲类', list: ['招牌鸡公小煲9.1元', '鸡公煲+泡面11.1元', '鲍汁黄焖鸡9.1元', '酱香猪肉小煲11.1元', '松滋鸡9.1元', '蔬菜煲8.1元', '鲜鸡小锅9.1元'] }
+        ]
+    },
+    suancai: {
+        name: '招牌酸菜鱼&秘制瓦香鸡',
+        desc: '水运一食堂（二楼）',
+        icon: 'mdi:fish',
+        img: '/agent-py/media/stall_suancai.jpg?s=suancai',
+        items: [
+            { cat: '酸菜鱼系列', list: ['招牌酸菜鱼', '藤椒龙利鱼', '番茄鱼', '水煮肉片', '藤椒鱼'] },
+            { cat: '瓦香鸡系列', list: ['瓦香鸡', '瓦香脆皮肠13元', '瓦香小酥肉12元', '瓦香千叶豆腐11元'] }
+        ]
+    },
+    regamian: {
+        name: '武汉热干面',
+        desc: '水运二食堂（一楼）',
+        icon: 'mdi:noodles',
+        img: '/agent-py/media/stall_regamian.jpg?s=regamian',
+        items: [
+            { cat: '经典招牌系列', list: ['全料热干面5元/大份6元', '热干面4元/大份5元', '牛肉热干面14元/大份15元', '原汤面/米线5元', '武汉炸酱面/粉/米线8元', '原汤宽粉/原汤细粉5元', '重庆小面6元', '海带豆腐面/粉/米线6元', '老坛酸菜面/粉/米线6元'] }
+        ]
+    },
+    maokaya: {
+        name: '成都冒烤鸭',
+        desc: '水运二食堂（一楼）',
+        icon: 'mdi:food',
+        img: '/agent-py/media/stall_maokaya.jpg?s=maokaya',
+        items: [
+            { cat: '冒菜', list: ['冒菜主锅及加菜服务'] }
+        ]
+    },
+    jiangxin: {
+        name: '匠心卤热卤拌饭',
+        desc: '水运二食堂（一楼）',
+        icon: 'mdi:rice',
+        img: '/agent-py/media/stall_jiangxin.jpg?s=jiangxin',
+        items: [
+            { cat: '卤肉饭', list: ['卤肉饭', '双拼套餐'] }
+        ]
+    },
+    mazip: {
+        name: '长沙码子粉+面',
+        desc: '水运二食堂（一楼）',
+        icon: 'mdi:noodles',
+        img: '/agent-py/media/stall_mazip.jpg?s=mazip',
+        items: [
+            { cat: '粉面', list: ['随机汤粉', '拌面', '油泼面系列'] }
+        ]
+    },
+    tangshui: {
+        name: '糖水粥铺',
+        desc: '水运二食堂（一楼）',
+        icon: 'mdi:cup',
+        img: '/agent-py/media/stall_tangshui.jpg?s=tangshui',
+        items: [
+            { cat: '粥品饮品', list: ['各类粥品', '糖水', '饮品'] }
+        ]
+    },
+    kaoli: {
+        name: '烤梨先生&壹家茶水',
+        desc: '水运二食堂（二楼）',
+        icon: 'mdi:tea',
+        img: '/agent-py/media/stall_kaoli.jpg?s=kaoli',
+        items: [
+            { cat: '饮品系列', list: ['柠檬茶', '咖啡', '奶茶', '小吊梨汤'] }
+        ]
+    },
+    luosifen: {
+        name: '柳州螺蛳粉',
+        desc: '水运二食堂（二楼）',
+        icon: 'mdi:noodles',
+        img: '/agent-py/media/stall_luosifen.jpg?s=luosifen',
+        items: [
+            { cat: '螺蛳粉系列', list: ['螺蛳粉+煎鸡蛋12元', '干捞螺蛳粉14元', '桂林三鲜粉12元', '桂林叉烧粉14元', '桂林牛肉粉14元', '原味螺蛳粉10元'] }
+        ]
+    },
+    xiaochanz: {
+        name: '小谗嘴炒饭',
+        desc: '水运二食堂（二楼）',
+        icon: 'mdi:rice',
+        img: '/agent-py/media/stall_xiaochanz.jpg?s=xiaochanz',
+        items: [
+            { cat: '炒饭', list: ['多种口味炒饭', '炒米粉'] }
+        ]
+    },
+    yueleiy: {
+        name: '悦擂悦湘',
+        desc: '水运二食堂（二楼）',
+        icon: 'mdi:chili',
+        img: '/agent-py/media/stall_yueleiy.jpg?s=yueleiy',
+        items: [
+            { cat: '湖南小炒肉', list: ['湖南小炒肉系列'] }
+        ]
+    },
+    waxiang: {
+        name: '瓦县鸡米饭',
+        desc: '水运二食堂（二楼）',
+        icon: 'mdi:food-drumstick',
+        img: '/agent-py/media/stall_waxiang.jpg?s=waxiang',
+        items: [
+            { cat: '瓦香鸡系列', list: ['瓦香鸡系列'] }
+        ]
+    },
+    huangmen: {
+        name: '黄焖鸡米饭',
+        desc: '水运二食堂（二楼）',
+        icon: 'mdi:pot-steam',
+        img: '/agent-py/media/stall_huangmen.jpg?s=huangmen',
+        items: [
+            { cat: '黄焖鸡系列', list: ['黄焖鸡', '新疆炒米粉'] }
+        ]
+    },
+    canting3: {
+        name: '学生三食堂',
+        desc: '水运三食堂',
+        icon: 'mdi:silverware',
+        img: '/agent-py/media/stall_canting3.jpg?s=canting3',
+        items: [
+            { cat: '自选菜区', list: ['蓝色3元', '红色4元', '白色5元', '黄色6元', '绿色7元'] },
+            { cat: '早餐面点', list: ['红糖发糕2元/块', '玉米发糕2元/块', '汤圆米酒3元/碗', '红枣玉米羹3.5元/碗'] },
+            { cat: '新疆炒米粉', list: ['火腿炒米粉+馕15元', '肥肠炒米粉+馕16元', '炒馕12元（可选：不辣/微辣/中辣/特辣）'] }
+        ]
+    }
+};
+
+// 社团组织详情数据（基础）
+const clubDetails = {
+        studentAffairs: {
+            name: '余家头校区学生事务办公室',
+            icon: 'mdi:office-building',
+            items: [
+                { cat: '核心职能', list: ['统筹全校区学生管理、学风建设、安全稳定', '评奖评优、违纪处理', '就业服务、跨学院学生工作协调', '航海类半军事化管理统筹'] },
+                { cat: '精准对接场景', list: ['学生重大事务办理', '校区政策咨询', '评优疑难问题', '纪律处分对接'] }
+            ]
+        },
+        communityCommittee: {
+            name: '海虹学生社区管委会',
+            icon: 'mdi:home-group',
+            items: [
+                { cat: '核心职能', list: ['负责宿舍园区管理、宿舍文化建设', '文明寝室评比、楼栋学生自治', '宿舍安全排查、社区文体活动组织', '宿管问题统筹'] },
+                { cat: '精准对接场景', list: ['宿舍评优', '楼栋事务反馈', '宿舍社区活动报名', '宿舍安全问题整改'] }
+            ]
+        },
+        studyDept: {
+            name: '学习部',
+            icon: 'mdi:book-open-page-variant',
+            items: [
+                { cat: '核心职能', list: ['主抓校区学风建设，开展日常查课、晚自习考勤', '组织学霸分享会、期末备考讲座、四六级/考研经验交流会', '承办校级辩论赛、知识竞赛、学术打卡等学风类活动', '收集学生学习问题，对接教务处反馈课堂、课程相关问题'] },
+                { cat: '精准对接场景', list: ['学习类活动报名', '学风问题反馈', '查课考勤对接', '学术活动申请举办'] }
+            ]
+        },
+        rightsDept: {
+            name: '权益部',
+            icon: 'mdi:shield-check',
+            items: [
+                { cat: '核心职能', list: ['搭建学校与学生的沟通桥梁，常态化收集食堂、宿舍、教学楼等生活权益问题', '对接学校后勤集团、宿管中心、教务处、保卫处跟进问题整改', '开展权益宣讲、宿舍安全、反诈科普、维权知识普及', '处理学生生活投诉、意见建议，公示整改结果'] },
+                { cat: '精准对接场景', list: ['宿舍设施损坏报修', '食堂问题投诉', '校园生活维权', '安全问题反馈'] }
+            ]
+        },
+        // ===== 新增：学团组织部门详情 =====
+        jiaowuXinli: {
+            name: '交物心理协会',
+            icon: 'mdi:heart-pulse',
+            items: [
+                { cat: '核心职责', list: ['负责学院心理健康教育，开展心理班会、心理素拓、情绪疏导活动', '组织心理健康科普宣传、心理团建活动', '排查班级心理问题，协助学生进行心理疏导'] },
+                { cat: '精准对接场景', list: ['心理压力疏导咨询', '心理活动报名', '班级心理班会开展'] }
+            ]
+        },
+        studyDeptFull: {
+            name: '学习部',
+            icon: 'mdi:book-open-page-variant',
+            items: [
+                { cat: '核心职责', list: ['主抓校区学风建设，开展日常查课、晚自习考勤', '组织学霸分享会、期末备考讲座、四六级/考研经验交流会', '承办校级辩论赛、知识竞赛、学术打卡等学风类活动', '收集学生学习问题，对接教务处反馈课堂、课程相关问题'] },
+                { cat: '精准对接场景', list: ['学习类活动报名', '学风问题反馈', '查课考勤对接', '学术活动申请举办'] }
+            ]
+        },
+        rightsDeptFull: {
+            name: '权益部',
+            icon: 'mdi:shield-check',
+            items: [
+                { cat: '核心职责', list: ['搭建学校与学生的沟通桥梁，常态化收集食堂、宿舍、教学楼、澡堂、水电等生活权益', '对接学校后勤集团、宿管中心、教务处、保卫处跟进问题整改', '开展权益宣讲、宿舍安全、反诈科普、维权知识普及', '处理学生生活投诉、意见建议，公示整改结果'] },
+                { cat: '精准对接场景', list: ['宿舍设施损坏报修', '食堂问题投诉', '校园生活维权', '安全问题反馈'] }
+            ]
+        },
+        wenyiDept: {
+            name: '文艺部',
+            icon: 'mdi:theater',
+            items: [
+                { cat: '核心职责', list: ['策划执行校区大型文艺活动（迎新晚会、毕业晚会、校园艺术节、歌手大赛等）', '统筹节目筛选、排练、舞台布置、晚会现场调度', '组建校级文艺表演队伍，储备晚会节目人才', '配合学校各类庆典、表彰活动的文艺节目输出'] },
+                { cat: '精准对接场景', list: ['文艺节目报名', '晚会参演', '校园文艺活动举办', '舞台物资对接'] }
+            ]
+        },
+        tiyuDept: {
+            name: '体育部',
+            icon: 'mdi:basketball',
+            items: [
+                { cat: '核心职责', list: ['统筹校区各类体育赛事（校运动会、篮球赛、足球赛、羽毛球赛、接力跑等）', '组织日常晨跑打卡、阳光体育活动', '负责赛事报名、裁判协调、赛程安排、成绩统计、奖状发放', '普及体育锻炼、运动安全知识，营造校园运动氛围'] },
+                { cat: '精准对接场景', list: ['体育赛事报名', '班级体育活动申请', '运动赛事问题咨询', '赛事奖状申领'] }
+            ]
+        },
+        wailianDept: {
+            name: '外联部',
+            icon: 'mdi:handshake',
+            items: [
+                { cat: '核心职责', list: ['对接校外企业、商家，为校级大型活动争取赞助资金', '维护校企合作资源，搭建学生社会实践平台', '对接武汉各大高校学生会开展校际交流与合作', '负责对外活动洽谈、合同对接、合作备案'] },
+                { cat: '精准对接场景', list: ['活动赞助对接', '校际交流合作', '校企活动报名', '外联资源咨询'] }
+            ]
+        },
+        xuanchuanDept: {
+            name: '宣传部',
+            icon: 'mdi:camera',
+            items: [
+                { cat: '核心职责', list: ['负责校级所有学生活动的宣传策划、海报展板、推文文案、视频剪辑', '活动现场摄影、摄像、新闻稿撰写、活动后期宣传复盘', '运营校区学生会官方新媒体平台，把控宣传内容质量', '设计制作各类校园活动物料、宣传周边'] },
+                { cat: '精准对接场景', list: ['活动宣传申请', '新闻稿投稿', '素材拍摄对接', '新媒体内容咨询'] }
+            ]
+        },
+        zuzhiDept: {
+            name: '组织部',
+            icon: 'mdi:account-tree',
+            items: [
+                { cat: '核心职责', list: ['全校团员信息管理、团籍注册、团组织关系转接', '开展团日活动、团课学习、青年大学习督促统计', '负责团干部选拔、培训、考核，优秀团员、团干部评选', '推优入党、团员积分统计、团支部建设考核、支部台账检查'] },
+                { cat: '精准对接场景', list: ['团关系转接', '推优入党', '团日活动报备', '团评优申请', '支部材料上交'] }
+            ]
+        },
+        shijianDept: {
+            name: '实践部',
+            icon: 'mdi:compass',
+            items: [
+                { cat: '核心职责', list: ['统筹全校社会实践、志愿服务、实习实训工作', '组织暑期"三下乡"社会实践、社区志愿服务、企业参访等活动', '对接校外实践基地搭建校企实践平台', '负责实践项目的立项、过程管理、总结评比和表彰'] },
+                { cat: '精准对接场景', list: ['社会实践报名', '志愿服务登记', '企业参访申请', '实践项目立项'] }
+            ]
+        },
+        shuangchuangDept: {
+            name: '双创部（创新创业部）',
+            icon: 'mdi:lightbulb-on-outline',
+            items: [
+                { cat: '核心职责', list: ['负责"挑战杯""互联网+""创青春"等创新创业赛事的组织、宣传、培训工作', '开展创新创业讲座、创业沙龙、创意集市等活动', '对接校内外创新创业资源，推动学生创业项目孵化', '收集并发布学科竞赛信息，组织赛前辅导'] },
+                { cat: '精准对接场景', list: ['双创赛事报名', '创业项目咨询', '学科竞赛信息获取', '创新创业培训申请'] }
+            ]
+        },
+        xinxuanCenter: {
+            name: '信宣中心',
+            icon: 'mdi:share-variant',
+            items: [
+                { cat: '核心职责', list: ['负责团委新媒体平台（微信公众号、QQ空间、微博等）的运营维护', '制作推送、海报、视频等宣传物料', '跟踪报道校级活动，采编新闻稿件', '管理团委官网信息发布，维护网络安全和内容审核'] },
+                { cat: '精准对接场景', list: ['宣传物料制作申请', '活动报道对接', '新媒体投稿', '信息发布审核'] }
+            ]
+        },
+        qingxie: {
+            name: '青年志愿者协会',
+            icon: 'mdi:hand-heart',
+            items: [
+                { cat: '核心职责', list: ['统筹全校志愿服务工作，管理志愿者注册、培训、时长认证', '组织开展社区服务、支教助学、敬老助残、环保公益等志愿服务活动', '承接校外大型赛事会议的志愿服务工作', '评选表彰优秀志愿者和志愿服务项目'] },
+                { cat: '精准对接场景', list: ['志愿者注册', '志愿活动报名', '志愿服务时长认证', '志愿项目申报'] }
+            ]
+        },
+        academic: {
+            name: '学术科技类社团',
+            icon: 'mdi:flask',
+            items: [
+                { cat: '数学建模协会', list: ['组织数模培训、国赛/美赛备赛', '建模交流、数据分析实训', '开展数模打卡、经验分享', '对接：数学建模比赛备赛、数据分析学习、科创组队'] },
+                { cat: '机器人协会/电子技术协会', list: ['开展电路实训、机器人组装调试', '电子科创竞赛、硬件实操教学', '智能设备研发实践', '对接：电子硬件学习、机器人竞赛、工科科创实训'] },
+                { cat: '人工智能协会/编程爱好者协会', list: ['开展编程教学、AI科普、算法训练', '程序开发、计算机类竞赛备赛', '对接：编程入门、算法学习、计算机科创赛事'] }
+            ]
+        },
+        culture: {
+            name: '文化艺术类社团',
+            icon: 'mdi:palette',
+            items: [
+                { cat: '辩论协会', list: ['举办校级辩论赛、辩论培训、思辨交流', '校际辩论友谊赛，锻炼口才与逻辑', '对接：辩论赛报名、辩论技巧学习、思辨活动参与'] },
+                { cat: '书法/摄影/笛箫协会', list: ['开展书法练字、摄影拍摄修图', '器乐教学、文艺展演、传统文化科普', '对接：兴趣特长学习、文艺展演、社团团建'] },
+                { cat: '动漫协会', list: ['开展动漫交流、二次元文化活动', '漫展团建、文创创作、兴趣分享', '对接：动漫兴趣交流、社团文娱活动'] }
+            ]
+        },
+        sports: {
+            name: '体育竞技类社团',
+            icon: 'mdi:basketball',
+            items: [
+                { cat: '篮球/足球/羽毛球协会', list: ['组织日常训练、校内联赛、趣味体育赛', '校外友谊赛，普及球类运动技能', '对接：球类运动训练、体育赛事报名、运动交友'] },
+                { cat: '游泳协会/武术协会', list: ['开展游泳教学、防溺水科普', '武术套路训练、防身术教学、传统体育推广', '对接：游泳学习、武术训练、体育技能提升'] }
+            ]
+        },
+        public: {
+            name: '公益实践类社团',
+            icon: 'mdi:hand-heart',
+            items: [
+                { cat: '爱心社/环保协会', list: ['开展爱心支教、公益募捐', '校园环保、垃圾分类宣传、绿色校园建设', '对接：公益志愿、环保活动、爱心帮扶'] },
+                { cat: '支教团/社区服务团', list: ['对接周边社区、中小学，长期开展支教服务', '社区帮扶、基层公益实践', '对接：长期支教报名、社区志愿服务'] },
+                { cat: '法律援助协会', list: ['普及大学生法律知识、反诈普法', '权益法律咨询、校园法治宣传', '对接：法律问题咨询、普法活动参与'] }
+            ]
+        },
+        star1: {
+            name: '创业就业俱乐部',
+            icon: 'mdi:briefcase',
+            items: [
+                { cat: '核心职能', list: ['开展职业规划讲座、企业宣讲会', '求职技能培训、简历修改', '实习就业对接、创业孵化指导'] },
+                { cat: '精准对接场景', list: ['求职咨询、简历优化', '就业讲座、创业项目咨询'] }
+            ]
+        },
+        star2: {
+            name: '国防星火社团',
+            icon: 'mdi:star-shooting',
+            items: [
+                { cat: '核心职能', list: ['开展国防教育宣讲、红色研学', '军训协助、军事技能科普', '征兵政策宣传、爱国主义教育活动'] },
+                { cat: '精准对接场景', list: ['国防教育学习、征兵咨询', '红色实践活动、军训志愿'] }
+            ]
+        },
+        star3: {
+            name: '大学生艺术协会（余区分会）',
+            icon: 'mdi:theater',
+            items: [
+                { cat: '核心职能', list: ['统筹声乐、舞蹈、器乐、话剧四大类文艺培训与演出', '承接校区各类大型晚会节目输出', '文艺人才培养'] },
+                { cat: '精准对接场景', list: ['才艺学习、晚会参演', '文艺节目编排'] }
+            ]
+        }
+    };
+
+// 打开社团组织详情模态框
+function openClubModal(key) {
+        const detail = clubDetails[key];
+        if (!detail) return;
+        
+        let itemsHtml = '';
+        detail.items.forEach(cat => {
+            itemsHtml += `<div class="mb-3"><h5 class="font-semibold text-blue-700 text-sm mb-1">${cat.cat}</h5><ul class="text-sm text-gray-600 space-y-0.5">`;
+            cat.list.forEach(item => {
+                itemsHtml += `<li>• ${item}</li>`;
+            });
+            itemsHtml += `</ul></div>`;
+        });
+        
+        document.getElementById('clubModalContent').innerHTML = `
+            <div class="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto p-6 relative">
+                <button onclick="closeClubModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600">&times;</button>
+                <div class="flex items-center gap-3 mb-4">
+                    <iconify-icon icon="${detail.icon}" class="text-3xl text-blue-600"></iconify-icon>
+                    <h3 class="text-xl font-bold text-gray-800">${detail.name}</h3>
+                </div>
+                <div class="border-t pt-4">
+                    ${itemsHtml}
+                </div>
+            </div>
+        `;
+        document.getElementById('clubModal').classList.add('active');
+    }
+
+// 关闭社团组织详情模态框
+function closeClubModal() {
+        document.getElementById('clubModal').classList.remove('active');
+    }
+
+// 点击社团模态框外部关闭
+document.addEventListener('click', function(e) {
+        const modal = document.getElementById('clubModal');
+        if (e.target === modal) {
+            closeClubModal();
+        }
+    });
+
+// 打开食堂档口详情模态框
+function openFoodModal(key) {
+    const detail = foodDetails[key];
+    if (!detail) return;
+    
+    let itemsHtml = '';
+    detail.items.forEach(cat => {
+        itemsHtml += `<div class="mb-3"><h5 class="font-semibold text-blue-700 text-sm mb-1">${cat.cat}</h5><ul class="text-sm text-gray-600 space-y-0.5">`;
+        cat.list.forEach(item => {
+            itemsHtml += `<li>• ${item}</li>`;
+        });
+        itemsHtml += `</ul></div>`;
+    });
+    
+    document.getElementById('foodModalContent').innerHTML = `
+        <div class="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto p-6 relative">
+            <button onclick="closeFoodModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600">&times;</button>
+            <div class="flex items-center gap-3 mb-4">
+                <iconify-icon icon="${detail.icon}" class="text-3xl text-blue-600"></iconify-icon>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800">${detail.name}</h3>
+                    <p class="text-sm text-gray-500">${detail.desc}</p>
+                </div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-3 mb-4">
+                <img src="${detail.img}" alt="${detail.name}实拍" class="w-full rounded-lg shadow-sm" style="max-width:100%; height:auto; max-height:400px; object-fit:contain;">
+                <p class="text-xs text-gray-400 text-center mt-1">📷 ${detail.name}实拍</p>
+            </div>
+            <div class="border-t pt-4">
+                ${itemsHtml}
+            </div>
+        </div>
+    `;
+    document.getElementById('foodModal').classList.add('active');
+}
+
+// 关闭食堂档口详情模态框
+function closeFoodModal() {
+    document.getElementById('foodModal').classList.remove('active');
+}
+
+// 点击模态框外部关闭
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('foodModal');
+    if (e.target === modal) {
+        closeFoodModal();
+    }
+});
+</script>
+&gt;</body></html>
